@@ -5,5 +5,5 @@ import (
 )
 
 func Run() {
-
+	import_plugin()
 }
