@@ -2,13 +2,25 @@
 # Make sure to check the documentation at https://goreleaser.com
 before:
   hooks:
-    # You may remove this if you don't use go modules.
     - go mod tidy
-    # you may remove this if you don't need go generate
+    - go get
     - go generate ./...
 builds:
-  - env:
+  - main: ./cmd/gim
+    env:
       - CGO_ENABLED=0
+    flags: &flags
+      - "-trimpath"
+    ldflags: &ldflags
+      - "-s -w -extldflags '-static'"
+      # enable debugging symbols
+      #- "-extldflags '-static'"
+      - "-X main.version={{ .Version }}"
+      - "-X main.commit={{ .ShortCommit }}"
+      - "-X main.date={{ .CommitDate }}"
+    mod_timestamp: &mod_timestamp "{{ .CommitTimestamp }}"
+
+
     goos:
       - linux
       - windows
@@ -20,8 +32,10 @@ archives:
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
-      {{- if eq .Arch "amd64" }}x86_64
+      {{- if eq .Arch "amd64" }}amd64
       {{- else if eq .Arch "386" }}i386
+      {{- else if and (eq .Arch "arm") (eq .Arm "6") }}armv6l
+      {{- else if and (eq .Arch "arm") (eq .Arm "6") }}armv6l
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     # use zip for windows archives

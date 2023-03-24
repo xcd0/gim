@@ -2,5 +2,10 @@
 
 vim っぽいテキストエディタを実装してみる。
 
-実装を通して[tcel](https://github.com/gdamore/tcell)の使い方を学んでみる。
-できるだけTDDしたい。
+* [tcel](https://github.com/gdamore/tcell)を使いたい。
+* [goreleaser](https://github.com/goreleaser/goreleaser)を使いたい。
+* できるだけTDDしたい。
+* githubのciを使いたい。
+* できるだけTDDしたい。
+* luaとかでプラグインかけるようにしたい。
+* golangのpluginを使ってみたい。
