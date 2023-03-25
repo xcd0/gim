@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/urfave/cli/v2"
+	"github.com/xcd0/gim"
 )
 
 const (
@@ -25,55 +26,6 @@ func main() {
 
 	if err := newCliApp().Run(os.Args); err != nil {
 		log.Fatal(err)
-	}
-}
-
-func newVimCmd() *cli.Command {
-	return &cli.Command{
-		Name:    "vim",
-		Aliases: []string{"v"},
-		Usage:   "Run text editor like vim",
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:    "config",
-				Aliases: []string{"c"},
-				Value:   "",
-				Usage:   "optional config file `conf.yaml`",
-			},
-			&cli.StringFlag{
-				Name:    "message",
-				Aliases: []string{"m", "msg"},
-				Value:   "",
-				Usage:   "path to commit message `FILE`",
-			},
-		},
-		Action: func(cCtx *cli.Context) error {
-			fmt.Println("run test command", cCtx.Args().First())
-			return nil
-			//confFilePath := ctx.String("config")
-			//fileInput := ctx.String("message")
-			//return test_command(confFilePath, fileInput)
-		},
-		Subcommands: []*cli.Command{
-			{
-				Name:    "add",
-				Aliases: []string{"a"},
-				Usage:   "add a new template",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("new task template: ", cCtx.Args().First())
-					return nil
-				},
-			},
-			{
-				Name:    "remove",
-				Aliases: []string{"r"},
-				Usage:   "remove an existing template",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("removed task template: ", cCtx.Args().First())
-					return nil
-				},
-			},
-		},
 	}
 }
 
@@ -101,6 +53,56 @@ func newCliApp() *cli.App {
 		HideVersion:          false,
 	}
 	return app
+}
+
+func newVimCmd() *cli.Command {
+	return &cli.Command{
+		Name:    "vim",
+		Aliases: []string{"v"},
+		Usage:   "Run text editor like vim",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "config",
+				Aliases: []string{"c"},
+				Value:   "",
+				Usage:   "optional config file `conf.yaml`",
+			},
+			&cli.StringFlag{
+				Name:    "message",
+				Aliases: []string{"m", "msg"},
+				Value:   "",
+				Usage:   "path to commit message `FILE`",
+			},
+		},
+		Action: func(cCtx *cli.Context) error {
+			fmt.Println("run test command", cCtx.Args().First())
+			gim.Run()
+			return nil
+			//confFilePath := ctx.String("config")
+			//fileInput := ctx.String("message")
+			//return test_command(confFilePath, fileInput)
+		},
+		Subcommands: []*cli.Command{
+			{
+				Name:    "add",
+				Aliases: []string{"a"},
+				Usage:   "add a new template",
+				Action: func(cCtx *cli.Context) error {
+					fmt.Println("new task template: ", cCtx.Args().First())
+					return nil
+				},
+			},
+			{
+				Name:    "remove",
+				Aliases: []string{"r"},
+				Usage:   "remove an existing template",
+				Action: func(cCtx *cli.Context) error {
+					fmt.Println("removed task template: ", cCtx.Args().First())
+					return nil
+				},
+			},
+		},
+	}
 }
 
 func newFlags() []cli.Flag {

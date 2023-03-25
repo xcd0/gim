@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/xcd0/gim/proto/greeter";
+
+package greeter;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc Say(Request) returns (Reply) {}
+}
+
+// The request message containing the user's name.
+message Request { string name = 1; }
+
+// The response message containing the greetings
+message Reply { string message = 1; }
