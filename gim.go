@@ -5,9 +5,6 @@ import (
 
 	"github.com/rivo/tview"
 	_ "github.com/urfave/cli/v2"
-
-	"github.com/hashicorp/go-plugin"
-	plug "github.com/xcd0/gim/go-plugin"
 )
 
 func Run() {
@@ -19,7 +16,6 @@ func Run() {
 func test() {
 	// 導入しそうなパッケージの呼び出しテスト用
 	test_tview()
-	test_plugin()
 }
 
 func test_tview() {
@@ -27,17 +23,6 @@ func test_tview() {
 	if err := tview.NewApplication().SetRoot(box, true).Run(); err != nil {
 		panic(err)
 	}
-}
-
-func test_plugin() {
-	plugin.Serve(&plugin.ServeConfig{
-		HandshakeConfig: plug.Handshake,
-		Plugins: map[string]plugin.Plugin{
-			"greeter": &plug.GreeterPlugin{Impl: &Hello{}},
-		},
-
-		GRPCServer: plugin.DefaultGRPCServer,
-	})
 }
 
 type Hello struct{}
