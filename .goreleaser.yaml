@@ -10,21 +10,34 @@ builds:
     env:
       - CGO_ENABLED=0
     flags: &flags
-      - "-trimpath"
+      - -trimpath
+      - -tags=netgo
+      - -installsuffix=netgo
     ldflags: &ldflags
-      - "-s -w -extldflags '-static'"
-      # enable debugging symbols
-      #- "-extldflags '-static'"
       - "-X main.version={{ .Version }}"
       - "-X main.commit={{ .ShortCommit }}"
       - "-X main.date={{ .CommitDate }}"
+      - -s
+      - -w
+      - "-H windowsgui"
+      - -buildid=
+      # enable debugging symbols
+      #- "-extldflags '-static'"
     mod_timestamp: &mod_timestamp "{{ .CommitTimestamp }}"
-
-
     goos:
-      - linux
       - windows
       - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm
+    goarm:
+      - "6"
+    ignore:
+      - goos: windows
+        goarch: arm
+      - goos: darwin
+        goarch: arm
 
 archives:
   - format: tar.gz
@@ -33,11 +46,8 @@ archives:
       {{ .ProjectName }}_
       {{- title .Os }}_
       {{- if eq .Arch "amd64" }}amd64
-      {{- else if eq .Arch "386" }}i386
-      {{- else if and (eq .Arch "arm") (eq .Arm "6") }}armv6l
       {{- else if and (eq .Arch "arm") (eq .Arm "6") }}armv6l
       {{- else }}{{ .Arch }}{{ end }}
-      {{- if .Arm }}v{{ .Arm }}{{ end }}
     # use zip for windows archives
     format_overrides:
     - goos: windows
@@ -52,6 +62,7 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+      - '^chore:'
 
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
