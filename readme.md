@@ -61,7 +61,7 @@ vim っぽいテキストエディタを実装してみる。
 ## 実装方針
 
 上の実装予定機能表から作業する機能を一つ取り上げTDDで開発する。  
-最初はテキストエディタとして最低限必要な機能を実装する。
+最初はテキストエディタとして最低限必要な機能を実装する。  
 [TDDについては別に書いた。](./tdd.md)  
 TODOリストはせっかくなのでgithubの機能を使用する。  
 https://github.com/users/xcd0/projects/2/views/1  
@@ -90,6 +90,7 @@ https://github.com/vim/vim/blob/master/runtime/doc/uganda.txt
 	* CUIの見た目とかは[tcel](https://github.com/gdamore/tcell)が良さそう。
 		* 直で使わないでwrapper使った方が良さそう。
 		* [rivo/tview](https://github.com/rivo/tview)を使う。
+			* boxごとの枠いらないのだけれども消せるのだろうか。
 * この先
 	* プラグインとか使えるようにしたい。何に使うかは不明だけれども。
 		* vimのプラグインがそのまま動いたらいいなあ。
