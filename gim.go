@@ -1,10 +1,7 @@
 package gim
 
 import (
-	"fmt"
-
 	"github.com/rivo/tview"
-	_ "github.com/urfave/cli/v2"
 )
 
 func Run() {
@@ -25,8 +22,9 @@ func test_tview() {
 	}
 }
 
-type Hello struct{}
-
-func (h *Hello) Say(name string) (string, error) {
-	return fmt.Sprintf("hello %s", name), nil
+func createBox(title string) {
+	box := tview.NewBox().SetBorder(true).SetTitle(title)
+	if err := tview.NewApplication().SetRoot(box, true).Run(); err != nil {
+		panic(err)
+	}
 }
