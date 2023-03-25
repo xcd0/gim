@@ -98,3 +98,12 @@ vim っぽいテキストエディタを実装してみる。
 * [ ] コピペ機能
 * [ ] undo
 * [ ] redo
+
+
+## LICENCE
+
+vimに肖ってGPL3にしています。  
+ウガンダの恵まれない子供たちへの寄付については以下のページを参照してください。  
+https://github.com/vim/vim/blob/master/runtime/doc/uganda.txt
+
+当然ですが、使用させていただいている各ライブラリは各ライブラリのライセンスです。
