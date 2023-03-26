@@ -75,8 +75,10 @@ featureブランチの名前はissueの番号を後ろに付与する。
 ## LICENSE
 
 vimに肖ってGPL3にしています。(vimはGPL互換のVIM LICENSE)  
-ウガンダの恵まれない子供たちへの寄付については以下のページを参照してください。    
+ウガンダの恵まれない子供たちへの寄付については以下のページを参照してください。  
+
 https://github.com/vim/vim/blob/master/runtime/doc/uganda.txt
+
 当然ですが、使用させていただいている各ライブラリは各ライブラリのライセンスです。
 
 ## ふわっとした展望
